@@ -1,0 +1,33 @@
+{
+  "Logistic Regression": {
+    "cv_roc_auc_mean": 0.8456373288917639,
+    "cv_roc_auc_std": 0.011742239589556794,
+    "cv_f1_mean": 0.6250667263003551,
+    "test_accuracy": 0.7381121362668559,
+    "test_precision": 0.5042735042735043,
+    "test_recall": 0.7887700534759359,
+    "test_f1": 0.6152241918665277,
+    "test_roc_auc": 0.8422434059262704
+  },
+  "Random Forest": {
+    "cv_roc_auc_mean": 0.8459771877631542,
+    "cv_roc_auc_std": 0.010034211590402615,
+    "cv_f1_mean": 0.6336254733956705,
+    "test_accuracy": 0.7629524485450674,
+    "test_precision": 0.5373134328358209,
+    "test_recall": 0.7700534759358288,
+    "test_f1": 0.6329670329670329,
+    "test_roc_auc": 0.8416388953473353
+  },
+  "Gradient Boosting": {
+    "cv_roc_auc_mean": 0.8457073970600781,
+    "cv_roc_auc_std": 0.009677683191701763,
+    "cv_f1_mean": 0.6319113263891804,
+    "test_accuracy": 0.7544357700496807,
+    "test_precision": 0.525,
+    "test_recall": 0.786096256684492,
+    "test_f1": 0.6295503211991434,
+    "test_roc_auc": 0.8422317807228292
+  },
+  "_best_model": "Logistic Regression"
+}
