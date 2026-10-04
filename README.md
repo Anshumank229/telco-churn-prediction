@@ -1,12 +1,14 @@
 # Customer Churn Prediction (Telco)
 
+**Author:** Your Name | **Dates:** Month 2026 – Month 2026
+
 Predicts which telecom customers are likely to cancel their service and explains the main drivers, so a retention team can act early.
 
 ## Results (hold-out test set, 20% split, seed 42)
 
 | Metric | Value |
 |---|---|
-| ROC-AUC | **0.84** (5-fold CV: 0.846 +/- 0.012) |
+| ROC-AUC | **0.84** (5-fold CV: 0.846) |
 | Recall (churners caught) | 0.79 |
 | Precision | 0.50 |
 | F1 | 0.62 |
@@ -21,26 +23,32 @@ Logistic Regression, Random Forest and Gradient Boosting all tie at about 0.846 
 
 ## Project structure
 ```
-data/raw/telco_churn.csv      IBM sample Telco dataset (7,043 customers)
+data/raw/telco_churn.csv        IBM sample Telco dataset (7,043 customers)
 notebooks/churn_analysis.ipynb  full analysis: cleaning -> EDA -> stats -> models -> SHAP -> recommendations
-src/config.py                 paths, seed, constants
-src/data_prep.py              cleaning + data-quality validation
-src/features.py               feature engineering + preprocessing
-src/train.py                  model comparison, evaluation, saves best model
-src/predict.py                score new customers
-tests/                        pytest checks for data quality and the saved model
-models/churn_model.joblib     trained pipeline
-reports/                      metrics.json, figures/, report.md
+src/config.py                   paths, seed, constants
+src/data_prep.py                cleaning + data-quality validation
+src/features.py                 feature engineering + preprocessing
+src/train.py                    model comparison, evaluation, saves best model
+src/predict.py                  score new customers
+tests/                          pytest checks for data quality and the saved model
+models/churn_model.joblib       trained pipeline
+reports/                        metrics.json, figures/, report.md
 ```
 
 ## How to run
+Tested on Python 3.12 and 3.14.
+
 ```bash
-python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
+git clone https://github.com/Anshumank229/telco-churn-prediction.git
+cd telco-churn-prediction
+
+python -m venv .venv                 # on Windows you can use: py -m venv .venv
+source .venv/bin/activate            # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-python -m src.train                                    # trains and saves model + metrics + figures
-python -m pytest -q                                    # data-quality and model tests
-python -m src.predict --demo                           # score 5 sample customers
+python -m src.train                  # trains models, saves best model + metrics + figures
+python -m pytest -q                  # data-quality and model tests
+python -m src.predict --demo         # score 5 sample customers
 python -m src.predict --input data/raw/telco_churn.csv --output reports/predictions.csv
 jupyter notebook notebooks/churn_analysis.ipynb
 ```
@@ -52,6 +60,15 @@ jupyter notebook notebooks/churn_analysis.ipynb
 4. **Modelling:** 3 models, 5-fold stratified CV, `class_weight="balanced"` for the 27/73 class imbalance.
 5. **Evaluation:** ROC-AUC, precision, recall, F1, confusion matrix, and a cost-based decision threshold.
 6. **Interpretation:** permutation importance and SHAP.
+
+<!--
+## Extensions (my own work)
+Fill this in after you run your own experiments, then delete the comment markers.
+
+| Experiment | What I changed | Result |
+|---|---|---|
+| Example: new tenure bins | 0-6, 7-12, 13-24, 25+ months | AUC went from 0.846 to ... |
+-->
 
 ## Limitations
 - The data is a single snapshot with no time dimension, so findings are associations, not proof of cause.
